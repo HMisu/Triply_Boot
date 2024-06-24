@@ -105,7 +105,6 @@ public class RecruitmentController {
 
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(305);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -127,7 +126,6 @@ public class RecruitmentController {
 
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(206);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -154,7 +152,6 @@ public class RecruitmentController {
 
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(307);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());

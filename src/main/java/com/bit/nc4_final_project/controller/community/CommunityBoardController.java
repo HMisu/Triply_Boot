@@ -32,7 +32,7 @@ public class CommunityBoardController {
             return ResponseEntity.ok(null);
         } catch (Exception e) {
             log.info("exception: {}", e.getMessage());
-            responseDTO.setErrorCode(500); // 예외 상황에 대한 에러 코드
+            responseDTO.setErrorCode(500);
             responseDTO.setErrorMessage("Failed to modify the community post: " + e.getMessage());
             responseDTO.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseDTO);

@@ -5,7 +5,6 @@ import com.bit.nc4_final_project.entity.User;
 import com.bit.nc4_final_project.entity.UserTag;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,6 @@ public class UserDTO {
     private String userId;
     private String userPw;
     private String userName;
-    //    private String location;
     private String areaCode;
     private String areaName;
     private String sigunguCode;
@@ -50,7 +48,6 @@ public class UserDTO {
                 .userId(this.userId)
                 .userPw(this.userPw)
                 .userName(this.userName)
-//            .location(this.location)
                 .areaCode(this.areaCode == null ? null : this.areaCode)
                 .areaName(this.areaName == null ? null : this.areaName)
                 .sigunguCode(this.sigunguCode == null ? null : this.sigunguCode)

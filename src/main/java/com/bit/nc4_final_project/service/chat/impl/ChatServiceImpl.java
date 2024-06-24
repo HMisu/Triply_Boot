@@ -28,10 +28,8 @@ public class ChatServiceImpl implements ChatService {
         return chatDTOList;
     }
 
-    // 새로운 채팅방 만들기
     @Override
     public List<ChatDTO> makeChatRoom(ChatMakeInfo chatMakeInfo) {
-        log.info("makeChatRoom : " + chatMakeInfo.toString());
         try {
             String partnerName = userRepository.findByUserId(chatMakeInfo.getPartnerId()).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다.")).getUserName();
             String partnerImg = userRepository.findByUserId(chatMakeInfo.getPartnerId()).orElseThrow().getProfileImageUrl();
@@ -56,10 +54,8 @@ public class ChatServiceImpl implements ChatService {
         }
     }
 
-    // todo : 안읽은 메세지 구현
     @Override
     public void plusUnreadCnt(String chatRoomId) {
-        log.info("===== plusUnreadCnt Arrived =====");
         Chat chat = chatRepository.findBySeq(Integer.parseInt(chatRoomId)).orElseThrow(() -> new RuntimeException("채팅방을 찾을 수 없습니다."));
 
         try {

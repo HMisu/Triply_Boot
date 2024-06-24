@@ -36,23 +36,18 @@ public class TravelServiceImpl implements TravelService {
     @Transactional
     @Override
     public void save() {
-        log.info("travel data save start");
         int totalCnt = tourApiExplorer.getTotalCnt();
         int totalPages = (int) Math.ceil((double) totalCnt / 199);
-        log.info("totalPages : " + totalPages);
 
         for (int i = 1; i <= 4; i++) {
             List<Travel> travels = tourApiExplorer.getList(i, 199, totalCnt);
-            log.info("getList: " + i);
             for (Travel travel : travels) {
                 Optional<TravelDetail> detail = tourApiExplorer.getDetailCommon(travel.getContentid());
                 detail.ifPresent(travel::setDetail);
             }
 
             travelRepository.saveAll(travels);
-            log.info("save 199 pieces");
         }
-        log.info("end");
     }
 
     @Override
@@ -68,7 +63,6 @@ public class TravelServiceImpl implements TravelService {
     @Transactional
     @Override
     public void saveAreaCodes() throws UnsupportedEncodingException {
-        log.info("area code data save start");
         List<Object> areaCodes = tourApiExplorer.getAreaCodeList(null);
 
         List<AreaCode> areaCodesToSave = areaCodes.stream()
@@ -92,10 +86,7 @@ public class TravelServiceImpl implements TravelService {
 
         if (!areaCodesToSave.isEmpty()) {
             areaCodeRepository.saveAll(areaCodesToSave);
-            log.info("save");
         }
-
-        log.info("end");
     }
 
     @Override
@@ -208,7 +199,6 @@ public class TravelServiceImpl implements TravelService {
         }
 
         if (travels == null) {
-            log.warn("No nearby travels found.");
             return Collections.emptyList();
         }
 

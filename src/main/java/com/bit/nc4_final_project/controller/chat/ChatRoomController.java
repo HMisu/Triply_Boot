@@ -32,13 +32,10 @@ public class ChatRoomController {
     public ResponseEntity<?> sendMessage(ChatMessageDTO messageDTO) {
         ResponseDTO<String> responseDTO = new ResponseDTO<>();
         int userCount = chatRoomSessionService.getSessionCount(messageDTO.getChatRoomId());
-        log.info("userCount : {}", userCount);
         try {
             if (userCount <= 1) {
-                log.info("==========unreadCnt plus==========");
                 chatService.plusUnreadCnt(messageDTO.getChatRoomId());
             } else if (userCount == 2) {
-                log.info("==========unreadCnt reset==========");
                 chatService.resetUnreadCnt(messageDTO.getChatRoomId());
             }
             ChatMessageDTO returnChatMessageDTO = chatRoomService.saveMessage(messageDTO);
@@ -54,7 +51,6 @@ public class ChatRoomController {
 
     }
 
-    // 채팅방 목록에서 채팅방 입장시 읽어오기
     @GetMapping("/chat/{chatRoomId}")
     public ResponseEntity<?> getMessages(@PathVariable("chatRoomId") String chatRoomId) {
 

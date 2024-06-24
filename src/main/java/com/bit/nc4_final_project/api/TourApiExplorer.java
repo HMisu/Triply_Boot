@@ -290,7 +290,6 @@ public class TourApiExplorer {
             String response = sendHttpRequest(url.toString());
 
             JSONObject responseBody = new JSONObject(response).getJSONObject("response").getJSONObject("body");
-            System.out.println(responseBody.getInt("totalCount"));
             JSONArray itemsArray = responseBody.optJSONObject("items").optJSONArray("item");
 
             if (itemsArray != null) {

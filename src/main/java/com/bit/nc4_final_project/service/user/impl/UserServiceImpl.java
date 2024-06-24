@@ -12,10 +12,8 @@ import com.bit.nc4_final_project.jwt.JwtTokenProvider;
 import com.bit.nc4_final_project.repository.user.UserRepository;
 import com.bit.nc4_final_project.service.user.UserService;
 import io.micrometer.common.util.StringUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -66,11 +64,11 @@ public class UserServiceImpl implements UserService {
     public UserDTO signin(UserDTO userDTO) {
         Optional<User> signInUser = userRepository.findByUserId(userDTO.getUserId());
 
-        if(signInUser.isEmpty()) {
+        if (signInUser.isEmpty()) {
             throw new RuntimeException("not exist userid");
         }
 
-        if(!passwordEncoder.matches(userDTO.getUserPw(), signInUser.get().getUserPw())) {
+        if (!passwordEncoder.matches(userDTO.getUserPw(), signInUser.get().getUserPw())) {
             throw new RuntimeException("wrong password");
         }
 
@@ -78,9 +76,7 @@ public class UserServiceImpl implements UserService {
 
         signinDTO.setLastLoginDate(LocalDateTime.now().toString());
         signinDTO.setToken(jwtTokenProvider.create(signInUser.get()));
-        System.out.println(jwtTokenProvider.create(signInUser.get()));
         userRepository.save(signinDTO.toEntity());
-//         System.out.println(jwtTokenProvider.create(signInUser.get()));
         userRepository.flush();
 
         return signinDTO;
@@ -122,7 +118,7 @@ public class UserServiceImpl implements UserService {
         }
         String fileUrl = "https://" + fileUtils.getBucketName() + ".s3." + "ap-northeast-2" + ".amazonaws.com/" + fileName;
         user.setProfileImageUrl(fileUrl);
-            userRepository.save(user);
+        userRepository.save(user);
         return fileUrl;
     }
 

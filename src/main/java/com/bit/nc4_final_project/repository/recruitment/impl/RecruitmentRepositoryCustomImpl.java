@@ -6,7 +6,6 @@ import com.bit.nc4_final_project.repository.recruitment.RecruitmentRepositoryCus
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -40,8 +39,6 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .where(searchPredicate)
                 .from(recruitment)
                 .fetchOne();
-
-
 
         return new PageImpl<>(recruitmentList, pageable, totalCnt);
     }
@@ -98,10 +95,6 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 return recruitment.regDate.desc();
             case "oldest":
                 return recruitment.regDate.asc();
-//            case "member_high":
-//                return review.rating.desc();
-//            case "member_low":
-//                return review.rating.asc();
             default:
                 return recruitment.regDate.desc();
         }

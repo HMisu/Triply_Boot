@@ -29,7 +29,6 @@ public class ReviewController {
                                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
                                            @RequestParam(value = "travelId", required = false) String searchTravelId,
                                            @RequestParam(value = "sort", required = false) String sort) {
-
         ResponseDTO<ReviewDTO> responseDTO = new ResponseDTO<>();
 
         try {
@@ -51,11 +50,9 @@ public class ReviewController {
             return ResponseEntity.ok(responseDTO);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(201);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -74,11 +71,9 @@ public class ReviewController {
             return ResponseEntity.ok(responseDTO);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(201);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -97,7 +92,6 @@ public class ReviewController {
             responseDTO.setErrorCode(202);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -123,7 +117,6 @@ public class ReviewController {
             responseDTO.setErrorCode(203);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -135,7 +128,6 @@ public class ReviewController {
         try {
             reviewService.modify(reviewDTO, customUserDetails);
 
-
             ReviewDTO modifiedReviewDTO = reviewService.findById(reviewDTO.getSeq(), customUserDetails.getUserSeq());
 
             responseDTO.setItem(modifiedReviewDTO);
@@ -143,11 +135,9 @@ public class ReviewController {
 
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(205);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -166,11 +156,9 @@ public class ReviewController {
 
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(206);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -193,11 +181,9 @@ public class ReviewController {
 
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             responseDTO.setErrorCode(207);
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setStatusCode(HttpStatus.BAD_REQUEST.value());
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }

@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -52,7 +53,7 @@ public class UserController {
     @PostMapping("/sign-up")
     public ResponseEntity<?> signup(@RequestBody UserDTO userDTO) {
         ResponseDTO<UserDTO> responseDTO = new ResponseDTO<>();
-        System.out.println(userDTO);
+
         try {
             if (isSocialLoginUser(userDTO.getUserId())) {
                 userDTO.setUserBirth("2000-01-01T00:00:00");
@@ -104,9 +105,6 @@ public class UserController {
         ResponseDTO<UserDTO> responseDTO = new ResponseDTO<>();
         try {
             UserDTO signinUserDTO = userService.signin(userDTO);
-//            System.out.println(signinUserDTO.getToken());
-//            signinUserDTO.setPw("");
-//            log.info("===========token: {} ==========", signinUserDTO.getToken());
             responseDTO.setItem(signinUserDTO);
             responseDTO.setStatusCode(HttpStatus.OK.value());
             return ResponseEntity.ok(responseDTO);
@@ -197,7 +195,7 @@ public class UserController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadProfileImage(@RequestParam(value = "file") MultipartFile file) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName(); // 사용자의 아이디를 가져옵니다.
+        String userId = authentication.getName();
         String profileImageUrl = userService.uploadProfileImage(file, userId);
         return ResponseEntity.ok(profileImageUrl);
     }
@@ -268,7 +266,6 @@ public class UserController {
         ResponseDTO<Map<String, Object>> responseDTO = new ResponseDTO<>();
 
         try {
-            // 사용자 인증 및 권한 확인
             if (!userDetails.getUsername().equals(userid)) {
             }
 

@@ -37,7 +37,6 @@ public class User {
     private String userId;
     private String userPw;
     private String userName;
-    // private String location;
     private String areaCode;
     private String areaName;
     private String sigunguCode;
@@ -53,14 +52,13 @@ public class User {
     @Column(nullable = true)
     private String profileImageUrl;
 
-
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-   @Builder.Default
-   @JsonManagedReference
-   private List<UserTag> userTags = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Builder.Default
+    @JsonManagedReference
+    private List<UserTag> userTags = new ArrayList<>();
 
     public void addUserTag(UserTag userTag) {
-       userTags.add(userTag);
+        userTags.add(userTag);
         userTag.setUser(this);
     }
 
@@ -75,7 +73,6 @@ public class User {
                 .userId(this.userId)
                 .userPw(this.userPw)
                 .userName(this.userName)
-//                .location(this.location)
                 .areaCode(this.areaCode == null ? null : this.areaCode)
                 .areaName(this.areaName == null ? null : this.areaName)
                 .sigunguCode(this.sigunguCode == null ? null : this.sigunguCode)
@@ -93,10 +90,10 @@ public class User {
     }
 
 
-
     public void setUserPw(String userPw) {
         this.userPw = userPw;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -110,12 +107,10 @@ public class User {
     }
 
     public void setTags(List<UserTag> newTags) {
-        // 현재 태그 목록을 삭제합니다.
         for (UserTag tag : new ArrayList<>(userTags)) {
             removeUserTag(tag);
         }
 
-        // 새로운 태그 목록을 추가합니다.
         if (newTags != null) {
             for (UserTag newTag : newTags) {
                 addUserTag(newTag);
